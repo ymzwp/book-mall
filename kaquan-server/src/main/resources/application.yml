@@ -1,31 +1,62 @@
 server:
   port: 8088
+  servlet:
+    session:
+      timeout: 30m                    # 30分钟无操作自动过期
+      cookie:
+        http-only: true               # JS 无法读取 cookie，防 XSS
+        secure: false                 # 生产环境开启 HTTPS 后改为 true
+        same-site: strict             # 严格同站，防 CSRF
+        name: CMSESSION               # 自定义 cookie 名，隐藏技术栈
 
 spring:
+  jackson:
+    time-zone: Asia/Shanghai
+    date-format: yyyy-MM-dd HH:mm:ss
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/coupon_mall?useSSL=false&serverTimezone=Asia/Shanghai&characterEncoding=utf8mb4
-    username: root
-    password: root
     type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/coupon_mall?useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: 1234
     druid:
+      # 连接池大小配置
       initial-size: 5
       min-idle: 5
       max-active: 20
+      max-wait: 60000
+      # 监控统计拦截器
+      filters: stat,wall
+      # 开启 StatViewServlet（监控页面）—— 生产环境务必改密码
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+        login-username: druidAdmin
+        login-password: Dr@2026Secure
+      # WebStatFilter 用于采集 web 关联数据
+      web-stat-filter:
+        enabled: true
+        url-pattern: /*
+        exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*'
 
-mybatis-plus:
+# MyBatis 配置
+mybatis:
   mapper-locations: classpath:mapper/*.xml
-  global-config:
-    db-config:
-      id-type: auto
-      logic-delete-field: deleted
-      logic-delete-value: 1
-      logic-not-delete-value: 0
   configuration:
     map-underscore-to-camel-case: true
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
-# 充值配置
-recharge:
-  min-amount: 1        # 最小充值金额
-  max-amount: 5000     # 最大充值金额
+  # Redis 缓存
+  redis:
+    host: localhost
+    port: 6379
+    timeout: 3000ms
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 4
+        min-idle: 2
+
+# 日志级别配置
+logging:
+  level:
+    cn.yunmeng.book.mapper: debug

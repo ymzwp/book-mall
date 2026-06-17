@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.yunmeng.book.mapper.UserDao">
+
+    <resultMap id="userMap" type="cn.yunmeng.book.pojo.User">
+        <id property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="nickName" column="nick_name"/>
+        <result property="phone" column="phone"/>
+        <result property="email" column="email"/>
+        <result property="avatar" column="avatar"/>
+        <result property="balance" column="balance"/>
+        <result property="points" column="points"/>
+        <result property="memberLevel" column="member_level"/>
+        <result property="inviteCode" column="invite_code"/>
+        <result property="invitedBy" column="invited_by"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+    <select id="findByUsername" resultMap="userMap">
+        SELECT * FROM user WHERE username = #{username}
+    </select>
+
+    <select id="findById" resultMap="userMap">
+        SELECT * FROM user WHERE id = #{id}
+    </select>
+
+    <insert id="insertUser" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO user(username, password, nick_name, avatar)
+        VALUES(#{username}, #{password}, #{nickName}, #{avatar})
+    </insert>
+
+    <update id="deductBalanceAndSetLevel">
+        UPDATE user SET balance = balance - #{amount}, member_level = #{level} WHERE id = #{id} AND balance >= #{amount}
+    </update>
+
+    <update id="addBalance">
+        UPDATE user SET balance = balance + #{amount} WHERE id = #{id}
+    </update>
+
+    <update id="updatePassword">
+        UPDATE user SET password = #{password} WHERE id = #{id}
+    </update>
+
+</mapper>
