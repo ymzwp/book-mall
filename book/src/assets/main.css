@@ -1,0 +1,73 @@
+@import './design.css';
+
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+html { -webkit-text-size-adjust:100%; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  font-size: 15px;
+  color: var(--text-primary);
+  background: var(--bg-page);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+a { text-decoration:none; color:inherit; }
+img { max-width:100%; display:block; }
+button { font-family:inherit; cursor:pointer; border:none; }
+input { font-family:inherit; }
+
+.page-wrap {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 28px 32px 100px;
+}
+
+/* 页面过渡 */
+.page-fade-enter-active { transition: opacity 0.3s ease, transform 0.3s ease; }
+.page-fade-leave-active { transition: opacity 0.2s ease; }
+.page-fade-enter-from { opacity:0; transform:translateY(12px); }
+.page-fade-leave-to { opacity:0; }
+
+/* 骨架屏 */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.skel {
+  background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 6px;
+}
+
+/* Element Plus 浅色覆盖 */
+.el-dialog { border-radius: 16px !important; background: #fff !important; }
+.el-dialog__title { color: var(--text-primary) !important; font-weight: 700 !important; }
+.el-dialog__body { color: var(--text-secondary) !important; }
+.el-form-item__label { color: var(--text-secondary) !important; font-weight: 500 !important; }
+.el-input__wrapper { background: #fff !important; border: 1px solid var(--border-card) !important; box-shadow: none !important; border-radius: 10px !important; }
+.el-input__wrapper:hover { border-color: var(--c-primary-light) !important; }
+.el-input__wrapper.is-focus { border-color: var(--c-primary) !important; box-shadow: 0 0 0 3px rgba(99,102,241,0.1) !important; }
+.el-input__inner { color: var(--text-primary) !important; }
+.el-input__inner::placeholder { color: var(--text-muted) !important; }
+.el-table { background: transparent !important; --el-table-bg-color: transparent; --el-table-tr-bg-color: transparent; --el-table-header-bg-color: #f8fafc; }
+.el-table th.el-table__cell { background: #f8fafc; color: var(--text-secondary); border-color: var(--border-card); font-weight: 600; }
+.el-table td.el-table__cell { border-color: var(--border-card); color: var(--text-primary); }
+.el-table--striped .el-table__body tr.el-table__row--striped td.el-table__cell { background: #fafbfc; }
+.el-radio__label { color: var(--text-primary) !important; }
+.el-radio__input.is-checked .el-radio__inner { background: #6366f1 !important; border-color: #6366f1 !important; }
+.el-radio__input.is-checked + .el-radio__label { color: #6366f1 !important; }
+.el-input-number .el-input__wrapper { background: #fff !important; border: 1px solid var(--border-card) !important; }
+.el-input-number__decrease, .el-input-number__increase { background: #f8fafc !important; color: var(--text-secondary) !important; border-color: var(--border-card) !important; }
+.el-tag--success { background: rgba(16,185,129,0.08) !important; color: #10b981 !important; border-color: rgba(16,185,129,0.2) !important; }
+.el-tag--danger { background: rgba(244,63,94,0.08) !important; color: #f43f5e !important; border-color: rgba(244,63,94,0.2) !important; }
+.el-button--primary { --el-button-bg-color:#6366f1; --el-button-border-color:#6366f1; --el-button-hover-bg-color:#4f46e5; --el-button-hover-border-color:#4f46e5; --el-button-text-color:#fff; border-radius:10px !important; font-weight:600 !important; }
+.el-button--default { background:#fff; border-color:var(--border-card); color:var(--text-secondary); border-radius:10px !important; font-weight:500 !important; }
+.el-button--default:hover { background:#f8fafc; border-color:#6366f1; color:#6366f1; }
+.el-message-box { background:#fff !important; border-radius:16px !important; }
+.el-message-box__title { color:var(--text-primary) !important; }
+.el-message-box__message { color:var(--text-secondary) !important; }
+.el-breadcrumb__inner { color: var(--text-muted) !important; }
+.el-breadcrumb__item:last-child .el-breadcrumb__inner { color: var(--text-primary) !important; font-weight: 600 !important; }

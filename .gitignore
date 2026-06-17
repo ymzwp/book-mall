@@ -1,0 +1,35 @@
+# --- 系统文件 ---
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# --- IDE ---
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+*.swp
+*.swo
+
+# --- 前端 (Node.js / Vite) ---
+node_modules/
+dist/
+dist-ssr/
+*.local
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# --- 后端 (Java / Maven) ---
+target/
+*.class
+*.jar
+*.war
+!MavenWrapper/
+!.mvn/wrapper/maven-wrapper.jar
+
+# --- 其他 ---
+*.tmp
+*.bak
